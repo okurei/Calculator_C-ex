@@ -1,40 +1,87 @@
 #include <stdio.h>
+#include <unistd.h>
 
+
+char getOperation();
 int getNumber();
+int getPlus();
+int getMinus();
+int getPer();
+float getDiv();
+
 
 int main()
 {
-    int a;
     int x = getNumber();
     int y = getNumber();
-    printf("chose operation: 0 for +, 1 for -, 2 for *, 3 for /.\n");
-    scanf("%d", &a);
-    if (a == 0)
+    char op = getOperation();
+    switch (op)
     {
-        printf("%i", x + y);
+        case '+':
+            printf("= %i\n", getPlus(x, y));
+            break;
+        case '-':
+            printf("= %i\n", getMinus(x, y));
+            break;
+        case '*':
+            printf("= %i\n", getPer(x, y));
+            break;
+        case '/':
+            if (y == 0)
+            {
+                printf("Impossible\n");
+            }
+            else
+            {
+                printf("= %f\n", getDiv(x, y));
+            }
+            break;
+        default:
+            printf("error 1\n");
+            break;
     }
-    else if (a == 1)
-    {
-        printf("%i", x - y);
-    }
-    else if (a == 2)
-    {
-        printf("%i", x * y);
-    }
-    else if (a == 3)
-    {
-        printf("%f", (float)x / (float)y);
-    }
-    else
-    {
-        printf("error");
-    }
+    sleep(5);
+    return 0;
 }
+
 
 int getNumber()
 {
     int a;
-    printf("insert number: ");
+    printf("Insert number: ");
     scanf("%i", &a);
     return a;
+}
+
+
+char getOperation()
+{
+    char op;
+    printf("Select operation: '+' '-' '*' '/' ?\n");
+    scanf(" %c", &op);
+    return op;
+}
+
+int getPlus(int x, int y)
+{
+    int plus = x + y;
+    return plus;
+}
+
+int getMinus(int x, int y)
+{
+    int minus = x - y;
+    return minus;
+}
+
+int getPer(int x, int y)
+{
+    int per = x * y;
+    return per;
+}
+
+float getDiv(int x, int y)
+{
+    float div = (float)x / (float)y;
+    return div;
 }
